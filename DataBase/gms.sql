@@ -22,10 +22,6 @@ CREATE TABLE Exercise (
         weight DECIMAL(5,2),allergies varchar(20),
         disablity varchar(20));
 CREATE TABLE Disability (
-         Id INT PRIMARY KEY,
-         Body_Part VARCHAR(20),
-         FOREIGN KEY (Id) REFERENCES Trainee(Id));
-CREATE TABLE Disability (
         Id INT PRIMARY KEY,
         Body_Part VARCHAR(20),
     FOREIGN KEY (Id) REFERENCES Trannie( trannie_id ));

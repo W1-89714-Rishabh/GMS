@@ -1,10 +1,17 @@
-function apiResult(Status,data,message){
-    return{Status,data,message}
+function apiResult(status, data, message) {
+    return { status, data, message }
 }
-function apiSuccess(data){
-    return {Status:"Success",data:data}
+
+function apiSuccess(data) {
+    return { status: "success", data: data }
 }
-function apiError(msg){
-    return{Status:"Error",message:msg}
+
+function apiError(msg) {
+    return { status: "error", message: msg }
 }
-module.exports={apiResult,apiError,apiSuccess}
+
+module.exports = {
+    apiResult,
+    apiSuccess,
+    apiError
+}

@@ -22,4 +22,15 @@ router .get("/:type",(req,resp)=>{
         return resp.send(apiSuccess(result))
     })
 })
+router.get("/bodytype/:bodyType",(req,resp)=>{
+    //example Underweight
+    db.query("select  Type,Exercise_Name,Body_Type from  exercise where Body_Type =?",[req.params.bodyType],(err,res)=>{
+        if(err){
+            return resp.send(apiError(err))
+        }
+        return resp.send(apiSuccess(res))
+    })
+})
+
+
 module.exports=router;

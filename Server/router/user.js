@@ -71,4 +71,20 @@ router.patch("/:id",(req,resp)=>{
         resp.send(apiSuccess("Weight updated"))
     })
 })
+router.post("/:id",(req,resp)=>{
+ db.query("INSERT INTO bmi (Trainee_Id, Bmi) SELECT Trainee_Id, (Weight / (Height * Height)) AS Bmi FROM traineeWHERE Trainee_Id = ?",[req.params.id],(err,result)=>{
+    if(err){
+        resp.send(apiError(err))
+    }
+    if(result.affectedRows!==1){
+        resp.send(apiError("malfunction"))
+    }
+    else{
+        resp.send(apiSuccess(result))
+    }
+ })
+
+})
+
+
 module.exports=router;

@@ -27,5 +27,19 @@ router.get("/vegan",(req,resp)=>{
         return resp.send(apiSuccess(res))
     })
 })
+router.get("/diet/:id",(req,resp)=>{
+    db.query(`SELECT d.Diet_Name, d.Type, d.Calories, d.Vegan 
+                FROM BMI b
+                JOIN Category c ON b.Trainee_Id = c.Trainee_Id
+                JOIN Diet d ON d.Type = c.Type
+                WHERE b.Trainee_Id = ?;
+                `,[req.params.id],(err,result)=>{
+                        if(err){
+                            resp.send(apiError(err))
+                        }else{
+                            resp.send(apiSuccess(result))
+                        }
+                })
+})
 
 module.exports=router;

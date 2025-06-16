@@ -54,3 +54,4 @@ CREATE TABLE Trainer (
     Email VARCHAR(30) UNIQUE,
     Password VARCHAR(20)
 );
+CREATE TABLE BMI(Trainee_Id int Primary key,Bmi DECIMAL(4,2));

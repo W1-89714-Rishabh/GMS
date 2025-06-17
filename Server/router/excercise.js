@@ -31,11 +31,12 @@ router.get("/bodytype/:bodyType",(req,resp)=>{
         return resp.send(apiSuccess(res))
     })
 })
-router.get("/bodytype/:id",(req,resp)=>{
-    db.query(`SELECT e.Exercise_Name, e.Type, e.Body_Type 
-                FROM Category c
-                JOIN Exercise e ON c.Type = e.Body_Type
-                WHERE c.Trainee_Id = ?;
+router.get("/particular/:id",(req,resp)=>{
+    db.query(`select e.exercise_name, e.type, e.body_type
+                from category c
+                join exercise e on c.type = e.body_type
+                where c.trainee_id = ?
+
 `,[req.params.id],(err,result)=>{
     if(err){
         return resp.send(apiError(err))

@@ -6,7 +6,7 @@ const excerciseRouter=require("./router/excercise")
 const dietRouter=require("./router/diet")
 app.use(express.json())
 app.use("/diet",dietRouter);
-//app.use("/products",productRouter);
+app.use("/products",productRouter);
 app.use("/excercise",excerciseRouter);
 app.use("/user",userRouter);
 app.listen(3000,()=>{

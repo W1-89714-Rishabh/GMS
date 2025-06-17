@@ -42,8 +42,7 @@ router.post("/signin", (req, resp) => {
         const user = result[0];
         if (password !== user.password) {
             return resp.send(apiError("Invalid email or password"));
-        } else {
-            
+        } else {    
             return resp.send(apiSuccess("You have logged in"));
         }
     });
@@ -71,8 +70,8 @@ router.patch("/:id",(req,resp)=>{
         resp.send(apiSuccess("Weight updated"))
     })
 })
-router.post("/:id",(req,resp)=>{
- db.query("INSERT INTO bmi (Trainee_Id, Bmi) SELECT Trainee_Id, (Weight / (Height * Height)) AS Bmi FROM traineeWHERE Trainee_Id = ?",[req.params.id],(err,result)=>{
+router.post("/bmi/:id",(req,resp)=>{
+ db.query("INSERT INTO bmi (Trainee_Id, Bmi) SELECT Trainee_Id, (Weight / (Height * Height)) AS Bmi FROM trainee WHERE Trainee_Id = ?",[req.params.id],(err,result)=>{
     if(err){
         resp.send(apiError(err))
     }

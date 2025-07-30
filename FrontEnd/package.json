@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "axios": "^1.11.0",
+    "create-expo-app": "^3.4.2",
+    "expo": "^53.0.20",
+    "react-dom": "19.0.0",
+    "react-native-web": "^0.20.0",
+    "@expo/metro-runtime": "~5.0.4"
+  }
+}

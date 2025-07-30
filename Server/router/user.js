@@ -40,7 +40,7 @@ router.post("/signin", (req, resp) => {
             return resp.send(apiError("Invalid email or password"));
         }
         const user = result[0];
-        if (password !== user.password) {
+        if (password == user.password) {
             return resp.send(apiError("Invalid email or password"));
         } else {    
             return resp.send(apiSuccess("You have logged in"));

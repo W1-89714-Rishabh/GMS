@@ -3,7 +3,7 @@ import { View, StyleSheet, Alert } from 'react-native';
 import { Button, TextInput, Text } from 'react-native-paper';
 import axios from 'axios'; 
 //change url
-const API_URL = 'http://<url>:3000';
+const API_URL = 'http://localhost:8081';
 
 function SigninScreen(props) {
     const [email, setEmail] = useState("");
@@ -34,7 +34,7 @@ function SigninScreen(props) {
     };
 
     const goToSignup = () => {
-        props.navigation.navigate('Signup');
+        props.navigation.navigate('SignUp');
     };
 
     return (

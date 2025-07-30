@@ -3,7 +3,7 @@ import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Button, TextInput, Text } from 'react-native-paper';
 import axios from 'axios';
 //yaha url dalna
-const API_URL = 'http://<url >:3000';
+const API_URL = 'http://localhost:8081';
 
 function SignupScreen(props) {
     const [name, setName] = useState("");

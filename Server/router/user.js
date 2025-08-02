@@ -2,7 +2,9 @@ const {apiSuccess, apiError} = require("../utils/apiresult")
 const express = require("express")
 //const bcrypt = require("bcrypt")
 const router = express.Router()
-const db = require("../utils/dbpool")
+const db = require("../utils/dbpool");
+
+//test
 
 router.post("/signup", (req, resp) => {
     const { name, email, password, height, weight, allergies, disability } = req.body;

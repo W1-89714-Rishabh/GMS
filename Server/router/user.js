@@ -8,7 +8,7 @@ const db = require("../utils/dbpool");
 
 router.post("/signup", (req, resp) => {
     const { name, email, password, height, weight, allergies, disability } = req.body;
-
+//tester commit
     db.query(
         "INSERT INTO Trainee (Name, Email, Password, Height, Weight, Allergies, Disability) VALUES (?, ?, ?, ?, ?, ?, ?)",
         [name, email, password, height, weight, allergies, disability],

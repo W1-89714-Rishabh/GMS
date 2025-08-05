@@ -49,6 +49,7 @@ router.post("/signin", (req, resp) => {
         }
     });
 });
+//tester
 router.get("/:id", (req, resp) => {
     db.query("SELECT * FROM Trainee WHERE Trainee_Id =?", [req.params.id],
         (err, results) => {

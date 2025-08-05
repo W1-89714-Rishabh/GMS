@@ -88,4 +88,58 @@ router.post("/bmi/:id",(req,resp)=>{
 
 })
 
+router.get('/ranking/:id', (req, res) => {
+  const userId = req.params.id;
+  db.query(
+    `SELECT SUM(Score) AS DailyScore 
+     FROM ranking 
+     WHERE Trainee_Id = ? AND Date = CURDATE()`,
+    [userId],
+    (err, dailyResults) => {
+      if (err) {
+        console.error('Daily query error:', err);
+        return res.status(500).json({ error: 'Error fetching daily score.' });
+      }
+
+      // Weekly Score
+      db.query(
+        `SELECT SUM(Score) AS WeeklyScore 
+         FROM ranking 
+         WHERE Trainee_Id = ? 
+         AND Date BETWEEN CURDATE() - INTERVAL 7 DAY AND CURDATE()`,
+        [userId],
+        (err, weeklyResults) => {
+          if (err) {
+            console.error('Weekly query error:', err);
+            return res.status(500).json({ error: 'Error fetching weekly score.' });
+          }
+
+          res.status(200).json({
+            userId,
+            dailyScore: dailyResults[0].DailyScore || 0,
+            weeklyScore: weeklyResults[0].WeeklyScore || 0
+          });
+        }
+      );
+    }
+  );
+});
+router.get('/api/ranking/lifetime', (req, res) => {
+  const query = `
+    SELECT t.Trainee_Id, t.Name, lr.Total_Score
+    FROM lifetime_ranking lr
+    JOIN trainee t ON lr.Trainee_Id = t.Trainee_Id
+    ORDER BY lr.Total_Score DESC
+  `;
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching ranking:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    res.json(results);
+  });
+});
+
+
 module.exports=router;

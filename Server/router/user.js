@@ -4,11 +4,11 @@ const express = require("express")
 const router = express.Router()
 const db = require("../utils/dbpool");
 
-//test
+
 
 router.post("/signup", (req, resp) => {
     const { name, email, password, height, weight, allergies, disability } = req.body;
-//tester commit
+
     db.query(
         "INSERT INTO Trainee (Name, Email, Password, Height, Weight, Allergies, Disability) VALUES (?, ?, ?, ?, ?, ?, ?)",
         [name, email, password, height, weight, allergies, disability],
@@ -49,7 +49,7 @@ router.post("/signin", (req, resp) => {
         }
     });
 });
-//tester
+
 router.get("/:id", (req, resp) => {
     db.query("SELECT * FROM Trainee WHERE Trainee_Id =?", [req.params.id],
         (err, results) => {
@@ -111,6 +111,7 @@ router.get('/ranking/:id', (req, res) => {
         (err, weeklyResults) => {
           if (err) {
             console.error('Weekly query error:', err);
+            res.send(apiError(err))
             return res.status(500).json({ error: 'Error fetching weekly score.' });
           }
 
@@ -141,5 +142,21 @@ router.get('/api/ranking/lifetime', (req, res) => {
   });
 });
 
+router.post('/ranking/submit', (req, res) => {
+  const { traineeId, score } = req.body;
 
+  db.query(
+    `INSERT INTO ranking (Trainee_Id, Date, Score) VALUES (?, CURDATE(), ?)`,
+    [traineeId, score],
+    (err, result) => {
+      if (err) {
+        console.error('Ranking insert error:', err);
+        res.send(apiError(err))
+        return res.status(500).json({ error: 'Database error' });
+      }
+      
+      return res.json({ message: 'Ranking submitted successfully' });
+    }
+  );
+});
 module.exports=router;

@@ -159,4 +159,27 @@ router.post('/ranking/submit', (req, res) => {
     }
   );
 });
+router.post("/recommendation/add", (req, resp) => {
+  const { trainer_id, trainee_id, message, diet_plan } = req.body;
+
+  const sql = `INSERT INTO trainer_recommendation (trainer_id, trainee_id, message, diet_plan) VALUES (?, ?, ?, ?)`;
+  db.query(sql, [trainer_id, trainee_id, message, diet_plan], (err, result) => {
+    if (err) return resp.send(apiError(err));
+    resp.send(apiSuccess("Recommendation sent successfully"));
+  });
+});
+router.get("/recommendation/:id", (req, resp) => {
+  const traineeId = req.params.id;
+
+  const sql = `SELECT message, diet_plan, created_at
+               FROM trainer_recommendation
+               WHERE trainee_id = ?
+               ORDER BY created_at DESC`;
+
+  db.query(sql, [traineeId], (err, results) => {
+    if (err) return resp.send(apiError(err));
+    resp.send(apiSuccess(results));
+  });
+});
+
 module.exports=router;

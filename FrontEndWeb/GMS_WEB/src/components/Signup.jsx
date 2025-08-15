@@ -27,7 +27,7 @@ const Signup = () => {
     e.preventDefault();
     setError('');
 
-    axios.post('http://localhost:3000/api/signup', formData)
+    axios.post('http://localhost:3000/user/signup', formData)
       .then(res => {
         sessionStorage.setItem('user', JSON.stringify(res.data.user));
         navigate('/user');

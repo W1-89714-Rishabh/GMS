@@ -86,3 +86,11 @@ JOIN (
     GROUP BY Trainee_Id
 ) weekly ON lr.Trainee_Id = weekly.Trainee_Id
 SET lr.Total_Score = lr.Total_Score + weekly.Weekly_Score;
+CREATE TABLE trainer_recommendation (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  trainer_id INT,
+  trainee_id INT,
+  message TEXT,
+  diet_plan TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

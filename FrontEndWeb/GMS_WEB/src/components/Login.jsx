@@ -23,7 +23,7 @@ const Login = () => {
     e.preventDefault();
     setError('');
 
-    axios.post('http://localhost:3000/api/login', credentials)
+    axios.post('http://localhost:3000/user/signin', credentials)
       .then(res => {
         sessionStorage.setItem('user', JSON.stringify(res.data.user));
         navigate('/user');
